@@ -1,8 +1,8 @@
-# FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubi8 as nvidia-builder:latest
-# RUN yum install -y python3.9
+FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubi8 as nvidia-builder
+RUN yum install -y python3.9
 
 
-FROM nvidia-builder:latest as build
+FROM nvidia-builder as build
 RUN mkdir /project
 WORKDIR /project
 COPY . /project
@@ -11,7 +11,7 @@ RUN python3 setup.py build
 RUN python3 setup.py install 
 
 
-FROM nvidia-builder:latest as environment
+FROM nvidia-builder as environment
 RUN mkdir /project
 WORKDIR /project
 COPY --from=build /project/dist/* .
