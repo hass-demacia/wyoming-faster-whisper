@@ -16,5 +16,5 @@ RUN mkdir /project
 WORKDIR /project
 COPY --from=build /project/dist/* .
 RUN easy_install-3 *.egg
-RUN cp run.sh /run.sh
+COPY run.sh /run.sh
 ENTRYPOINT ["/usr/bin/bash", "/run.sh"]
