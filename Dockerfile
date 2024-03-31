@@ -1,5 +1,5 @@
 FROM nvidia/cuda:12.1.0-cudnn8-runtime-ubi8 as nvidia-builder
-RUN yum install -y python3.9
+RUN yum install -y python3.9 && yum clean all && rm -rf /var/cache/yum/*
 
 
 FROM nvidia-builder as build
